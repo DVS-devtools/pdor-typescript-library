@@ -1,16 +1,8 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const commonPaths = require('./paths');
 
-module.exports = {
+const common = {
     mode: 'production',
-    entry: commonPaths.entryPath,
-    output: {
-        path: commonPaths.outputPath,
-        filename: 'index.js',
-        library: 'JsStorage',
-        libraryTarget: 'umd',
-        umdNamedDefine: true
-    },
     module: {
         rules: [
             {
@@ -39,3 +31,34 @@ module.exports = {
     ],
     devtool: 'source-map',
 };
+
+const config = {
+    umd: {
+        ...common,
+        entry: commonPaths.entryPath,
+        output: {
+            path: commonPaths.outputPath,
+            filename: 'index.js',
+            library: 'YourLibrary',
+            libraryTarget: 'umd',
+            umdNamedDefine: true,
+            chunkFilename: commonPaths.chunkFilename,
+        }
+    },
+    browser: {
+        ...common,
+        entry: commonPaths.browserEntryPath,
+        output: {
+            path: commonPaths.outputPath,
+            filename: 'index.min.js',
+            library: 'YourLibrary',
+            libraryTarget: 'var',
+            libraryExport: 'default',
+            umdNamedDefine: true,
+        }
+    }
+};
+
+const target = process.env.BUILD_TARGET;
+
+module.exports = config[target];
