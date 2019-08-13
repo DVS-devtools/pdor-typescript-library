@@ -45,7 +45,7 @@
     "typedoc": "^0.15.0",
     "typescript": "^3.1.6",
     "url-loader": "^2.0.0",
-    "webpack": "^4.38.0",
+    "webpack": "4.39.1",
     "webpack-cli": "^3.1.2",
     "webpack-dev-server": "^3.1.10",
     "webpack-hot-client": "^4.1.1",
